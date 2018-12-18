@@ -9,38 +9,133 @@ const CalcWrapper = styled.div`
 `;
 
 const Result = styled.div`
-	grid-column-start: span 4;
-	border: 2px solid black;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	padding: 1rem;
+  grid-column-start: span 4;
+  border: 2px solid black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
 `;
 
-
 class Calculator extends Component {
+  state = {
+    counter: 0,
+    elemA: 0,
+    elemB: 0,
+    operation: '',
+    isValid: false
+  };
+
+  numberClickedHandler = value => {
+    const newCounter = this.state.counter
+      ? Number(this.state.counter.toString() + value.toString())
+      : value
+      ? value
+      : 0;
+    this.setState({ counter: newCounter });
+  };
+
+  clearClickedHandler = () => {
+    this.setState({
+      counter: 0,
+      elemA: 0,
+      elemB: 0,
+      operation: '',
+      isValid: false
+    });
+  };
+
+  operationHandler = oper => {
+    const currentCounter = this.state.counter;
+    this.setState({
+      elemA: currentCounter,
+      operation: oper,
+      isValid: true,
+      counter: 0
+    });
+  };
+
+  solveHandler = () => {
+    if (this.state.isValid) {
+      let newCounter;
+      const elemB = this.state.counter;
+      switch (this.state.operation) {
+				case '+':
+					console.log('add');
+          newCounter = this.state.elemA + elemB;
+          this.setState({ counter: newCounter });
+          break;
+        case '-':
+          newCounter = this.state.elemA - elemB;
+          this.setState({ counter: newCounter });
+          break;
+        case '/':
+          newCounter = this.state.elemA / elemB;
+          this.setState({ counter: newCounter });
+          break;
+        case '*':
+          newCounter = this.state.elemA * elemB;
+          this.setState({ counter: newCounter });
+          break;
+        default:
+          break;
+			}
+			// console.log(this.state.elemA);
+			// console.log(this.state.counter);
+			// console.log(this.state.operation);
+			// const A = this.state.elemA;
+			// const B = this.state.counter;
+			// this.setState({counter: A+B});
+    }
+  };
+
   render() {
     return (
       <CalcWrapper>
-        <Result>Result window</Result>
-        {/* <Clear>Clear btn</Clear> */}
-				<Button colSpan={3}>Clear btn</Button>
-				<Button>/</Button>
-        <Button number>7</Button>
-        <Button number>8</Button>
-        <Button number>9</Button>
-				<Button>x</Button>
-        <Button number>4</Button>
-        <Button number>5</Button>
-        <Button number>6</Button>
-				<Button>+</Button>
-        <Button number>1</Button>
-        <Button number>2</Button>
-        <Button number>3</Button>
-				<Button>-</Button>
-				<Button number colSpan={2}>0</Button>
-				<Button number>,</Button>
-				<Button>=</Button>
+        <Result>{this.state.counter}</Result>
+        <Button colSpan={3} clickHandler={this.clearClickedHandler}>
+          Clear btn
+        </Button>
+        <Button clickHandler={() => this.operationHandler('/')}>/</Button>
+        <Button number clickHandler={() => this.numberClickedHandler(7)}>
+          7
+        </Button>
+        <Button number clickHandler={() => this.numberClickedHandler(8)}>
+          8
+        </Button>
+        <Button number clickHandler={() => this.numberClickedHandler(9)}>
+          9
+        </Button>
+        <Button clickHandler={() => this.operationHandler('*')}>*</Button>
+        <Button number clickHandler={() => this.numberClickedHandler(4)}>
+          4
+        </Button>
+        <Button number clickHandler={() => this.numberClickedHandler(5)}>
+          5
+        </Button>
+        <Button number clickHandler={() => this.numberClickedHandler(6)}>
+          6
+        </Button>
+        <Button clickHandler={() => this.operationHandler('+')}>+</Button>
+        <Button number clickHandler={() => this.numberClickedHandler(1)}>
+          1
+        </Button>
+        <Button number clickHandler={() => this.numberClickedHandler(2)}>
+          2
+        </Button>
+        <Button number clickHandler={() => this.numberClickedHandler(3)}>
+          3
+        </Button>
+        <Button clickHandler={() => this.operationHandler('-')}>-</Button>
+        <Button
+          number
+          colSpan={2}
+          clickHandler={() => this.numberClickedHandler(0)}
+        >
+          0
+        </Button>
+        <Button number>empty</Button>
+        <Button clickHandler={this.solveHandler}>=</Button>
       </CalcWrapper>
     );
   }
