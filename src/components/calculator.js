@@ -12,7 +12,9 @@ const Result = styled.div`
 	grid-column-start: span 4;
 	border: 2px solid black;
 	display: flex;
-	justify-content: right;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 1rem;
 `;
 
 
