@@ -6,16 +6,21 @@ const CalcWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+	border: 2px solid black;
 `;
 
 const Result = styled.div`
   grid-column-start: span 4;
+	font-size: 24px;
+	background-color: #2196f3;
   border: 2px solid black;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 1rem;
 `;
+
+
 
 class Calculator extends Component {
   state = {
@@ -24,7 +29,11 @@ class Calculator extends Component {
     elemB: 0,
     operation: '',
     isValid: false
-  };
+	};
+	
+	componentDidMount() {
+		console.log("Inside componentDidMount");
+	}
 
   numberClickedHandler = value => {
     const newCounter = this.state.counter
@@ -61,7 +70,6 @@ class Calculator extends Component {
       const elemB = this.state.counter;
       switch (this.state.operation) {
 				case '+':
-					console.log('add');
           newCounter = this.state.elemA + elemB;
           this.setState({ counter: newCounter });
           break;
@@ -80,12 +88,6 @@ class Calculator extends Component {
         default:
           break;
 			}
-			// console.log(this.state.elemA);
-			// console.log(this.state.counter);
-			// console.log(this.state.operation);
-			// const A = this.state.elemA;
-			// const B = this.state.counter;
-			// this.setState({counter: A+B});
     }
   };
 
@@ -96,7 +98,7 @@ class Calculator extends Component {
         <Button colSpan={3} clickHandler={this.clearClickedHandler}>
           Clear btn
         </Button>
-        <Button clickHandler={() => this.operationHandler('/')}>/</Button>
+        <Button clickHandler={() => this.operationHandler('/')}>&#247;</Button>
         <Button number clickHandler={() => this.numberClickedHandler(7)}>
           7
         </Button>
@@ -106,7 +108,7 @@ class Calculator extends Component {
         <Button number clickHandler={() => this.numberClickedHandler(9)}>
           9
         </Button>
-        <Button clickHandler={() => this.operationHandler('*')}>*</Button>
+        <Button clickHandler={() => this.operationHandler('*')}>&#215;</Button>
         <Button number clickHandler={() => this.numberClickedHandler(4)}>
           4
         </Button>

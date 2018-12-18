@@ -7,7 +7,7 @@ const StyledButton = styled.button`
   background-color: ${props => (props.number ? 'white' : '#f50057')};
   color: ${props => (props.number ? 'black' : 'white')};
   font-family: 'Fira Mono', monospace;
-  font-size: 24px;
+  font-size: ${props => props.oper ? '36px' : '24px'};
   padding: 1rem;
   border: 2px solid black;
   outline: none;
@@ -28,6 +28,7 @@ const Button = props => {
       onClick={props.clickHandler}
       colSpan={props.colSpan}
       number={props.number}
+			oper={props.oper}
     >
       {props.children}
     </StyledButton>
