@@ -6,21 +6,19 @@ const CalcWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-	border: 2px solid black;
+  border: 2px solid black;
 `;
 
 const Result = styled.div`
   grid-column-start: span 4;
-	font-size: 24px;
-	background-color: #2196f3;
+  font-size: 24px;
+  background-color: #2196f3;
   border: 2px solid black;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 1rem;
 `;
-
-
 
 class Calculator extends Component {
   state = {
@@ -29,11 +27,11 @@ class Calculator extends Component {
     elemB: 0,
     operation: '',
     isValid: false
-	};
-	
-	componentDidMount() {
-		console.log("Inside componentDidMount");
-	}
+  };
+
+  componentDidMount() {
+    console.log('Inside componentDidMount');
+  }
 
   numberClickedHandler = value => {
     const newCounter = this.state.counter
@@ -69,7 +67,7 @@ class Calculator extends Component {
       let newCounter;
       const elemB = this.state.counter;
       switch (this.state.operation) {
-				case '+':
+        case '+':
           newCounter = this.state.elemA + elemB;
           this.setState({ counter: newCounter });
           break;
@@ -87,7 +85,7 @@ class Calculator extends Component {
           break;
         default:
           break;
-			}
+      }
     }
   };
 
